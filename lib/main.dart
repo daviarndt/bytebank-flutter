@@ -75,14 +75,17 @@ class Editor extends StatelessWidget {
 }
 
 class ListaTransferencias extends StatelessWidget {
+  final List<Transferencia> _transferencias = List();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: <Widget>[
-          ItemTransferencia(Transferencia(100.0, 11111)),
-          ItemTransferencia(Transferencia(13200.0, 22222)),
-        ],
+      body: ListView.builder(
+        itemCount: _transferencias.length,
+        itemBuilder: (context, indice) {
+          final transferencia =_transferencias[indice];
+          return ItemTransferencia(transferencia);
+        },
       ),
       appBar: AppBar(
         title: Text("Transferências"),
@@ -93,6 +96,7 @@ class ListaTransferencias extends StatelessWidget {
             return FormularioTransferencia();
           }));
           future.then((transferenciaRecebida) {
+            _transferencias.add(transferenciaRecebida);
           });
         },
         backgroundColor: Colors.orangeAccent,
