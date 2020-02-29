@@ -13,20 +13,19 @@ class FormularioTransferencia extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          Editor(controlador: _controladorCampoNumeroConta, rotulo: "Número da Conta", dica: "0000"),
-          Editor(controlador: _controladorCampoValor, rotulo: "Valor", dica: "0.00", icone: Icons.monetization_on),
+          Editor(
+              controlador: _controladorCampoNumeroConta,
+              rotulo: "Número da Conta",
+              dica: "0000"),
+          Editor(
+              controlador: _controladorCampoValor,
+              rotulo: "Valor",
+              dica: "0.00",
+              icone: Icons.monetization_on),
           RaisedButton(
               color: Colors.blue,
               onPressed: () {
-                debugPrint("Clicou no confirmar");
-                final int numeroConta =
-                    int.tryParse(_controladorCampoNumeroConta.text);
-                final double valor =
-                    double.tryParse(_controladorCampoValor.text);
-                if (numeroConta != null && valor != null) {
-                  final transferenciaCriada = Transferencia(valor, numeroConta);
-                  debugPrint('$transferenciaCriada');
-                }
+                _criaTransferencia();
               },
               textColor: Colors.white,
               child: Text("Confirmar")),
@@ -36,6 +35,14 @@ class FormularioTransferencia extends StatelessWidget {
         title: Text("Criando Transferência"),
       ),
     );
+  }
+
+  void _criaTransferencia() {
+    final int numeroConta = int.tryParse(_controladorCampoNumeroConta.text);
+    final double valor = double.tryParse(_controladorCampoValor.text);
+    if (numeroConta != null && valor != null) {
+      final transferenciaCriada = Transferencia(valor, numeroConta);
+    }
   }
 }
 
@@ -57,7 +64,9 @@ class Editor extends StatelessWidget {
           fontSize: 24.0,
         ),
         decoration: InputDecoration(
-            icon: icone != null ? Icon(icone) : null, labelText: rotulo, hintText: dica),
+            icon: icone != null ? Icon(icone) : null,
+            labelText: rotulo,
+            hintText: dica),
         keyboardType: TextInputType.number,
       ),
     );
