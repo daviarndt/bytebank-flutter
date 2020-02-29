@@ -11,25 +11,27 @@ class FormularioTransferencia extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: <Widget>[
-          Editor(
-              controlador: _controladorCampoNumeroConta,
-              rotulo: "Número da Conta",
-              dica: "0000"),
-          Editor(
-              controlador: _controladorCampoValor,
-              rotulo: "Valor",
-              dica: "0.00",
-              icone: Icons.monetization_on),
-          RaisedButton(
-              color: Colors.blue,
-              onPressed: () {
-                _criaTransferencia(context);
-              },
-              textColor: Colors.white,
-              child: Text("Confirmar")),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Editor(
+                controlador: _controladorCampoNumeroConta,
+                rotulo: "Número da Conta",
+                dica: "0000"),
+            Editor(
+                controlador: _controladorCampoValor,
+                rotulo: "Valor",
+                dica: "0.00",
+                icone: Icons.monetization_on),
+            RaisedButton(
+                color: Colors.blue,
+                onPressed: () {
+                  _criaTransferencia(context);
+                },
+                textColor: Colors.white,
+                child: Text("Confirmar")),
+          ],
+        ),
       ),
       appBar: AppBar(
         title: Text("Criando Transferência"),
