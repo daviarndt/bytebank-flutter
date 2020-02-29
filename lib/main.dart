@@ -104,7 +104,9 @@ class ListaTransferenciasState extends State<ListaTransferencias> {
             return FormularioTransferencia();
           }));
           future.then((transferenciaRecebida) {
-            widget._transferencias.add(transferenciaRecebida);
+            if (transferenciaRecebida != null) {
+              widget._transferencias.add(transferenciaRecebida);
+            }
           });
         },
         backgroundColor: Colors.orangeAccent,
