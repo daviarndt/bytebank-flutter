@@ -1,9 +1,16 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 void main() => runApp(BytebankApp());
 
-class FormularioTransferencia extends StatelessWidget {
+class FormularioTransferencia extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return FormularioTransferenciaState();
+  }
+}
+
+class FormularioTransferenciaState extends State<FormularioTransferencia> {
   final TextEditingController _controladorCampoNumeroConta =
       TextEditingController();
   final TextEditingController _controladorCampoValor = TextEditingController();
@@ -81,7 +88,6 @@ class ListaTransferencias extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return ListaTransferenciasState();
   }
 }
@@ -102,7 +108,8 @@ class ListaTransferenciasState extends State<ListaTransferencias> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          final Future<Transferencia> future = Navigator.push(context, MaterialPageRoute(builder: (context) {
+          final Future<Transferencia> future =
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
             return FormularioTransferencia();
           }));
           future.then((transferenciaRecebida) {
@@ -115,7 +122,7 @@ class ListaTransferenciasState extends State<ListaTransferencias> {
         child: Icon(Icons.add),
       ),
       bottomNavigationBar:
-      BottomAppBar(color: Colors.blue, child: Container(height: 40.0)),
+          BottomAppBar(color: Colors.blue, child: Container(height: 40.0)),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
