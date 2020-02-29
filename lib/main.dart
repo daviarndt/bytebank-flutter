@@ -25,7 +25,7 @@ class FormularioTransferencia extends StatelessWidget {
           RaisedButton(
               color: Colors.blue,
               onPressed: () {
-                _criaTransferencia();
+                _criaTransferencia(context);
               },
               textColor: Colors.white,
               child: Text("Confirmar")),
@@ -37,11 +37,12 @@ class FormularioTransferencia extends StatelessWidget {
     );
   }
 
-  void _criaTransferencia() {
+  void _criaTransferencia(BuildContext context) {
     final int numeroConta = int.tryParse(_controladorCampoNumeroConta.text);
     final double valor = double.tryParse(_controladorCampoValor.text);
     if (numeroConta != null && valor != null) {
       final transferenciaCriada = Transferencia(valor, numeroConta);
+      Navigator.pop(context, transferenciaCriada);
     }
   }
 }
@@ -87,7 +88,14 @@ class ListaTransferencias extends StatelessWidget {
         title: Text("Transferências"),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.green,
+        onPressed: () {
+          final Future<Transferencia> future = Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return FormularioTransferencia();
+          }));
+          future.then((transferenciaRecebida) {
+          });
+        },
+        backgroundColor: Colors.orangeAccent,
         child: Icon(Icons.add),
       ),
       bottomNavigationBar:
@@ -132,7 +140,7 @@ class BytebankApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: FormularioTransferencia(),
+        body: ListaTransferencias(),
       ),
     );
   }
