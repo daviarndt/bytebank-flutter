@@ -13,34 +13,8 @@ class FormularioTransferencia extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              controller: _controladorCampoNumeroConta,
-              style: TextStyle(
-                fontSize: 24.0,
-              ),
-              decoration: InputDecoration(
-                  icon: Icon(Icons.person),
-                  labelText: 'Número da Conta',
-                  hintText: '0000'),
-              keyboardType: TextInputType.number,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              controller: _controladorCampoValor,
-              style: TextStyle(
-                fontSize: 24.0,
-              ),
-              decoration: InputDecoration(
-                  icon: Icon(Icons.monetization_on),
-                  labelText: 'Valor',
-                  hintText: '0.00'),
-              keyboardType: TextInputType.number,
-            ),
-          ),
+          Editor(controlador: _controladorCampoNumeroConta, rotulo: "Número da Conta", dica: "0000"),
+          Editor(controlador: _controladorCampoValor, rotulo: "Valor", dica: "0.00", icone: Icons.monetization_on),
           RaisedButton(
               color: Colors.blue,
               onPressed: () {
@@ -65,6 +39,31 @@ class FormularioTransferencia extends StatelessWidget {
   }
 }
 
+class Editor extends StatelessWidget {
+  final TextEditingController controlador;
+  final String rotulo;
+  final String dica;
+  final IconData icone;
+
+  Editor({this.controlador, this.rotulo, this.dica, this.icone});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: TextField(
+        controller: controlador,
+        style: TextStyle(
+          fontSize: 24.0,
+        ),
+        decoration: InputDecoration(
+            icon: icone != null ? Icon(icone) : null, labelText: rotulo, hintText: dica),
+        keyboardType: TextInputType.number,
+      ),
+    );
+  }
+}
+
 class ListaTransferencias extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -82,10 +81,8 @@ class ListaTransferencias extends StatelessWidget {
         backgroundColor: Colors.green,
         child: Icon(Icons.add),
       ),
-      bottomNavigationBar: BottomAppBar(
-        color: Colors.blue,
-        child: Container(height: 40.0)
-      ),
+      bottomNavigationBar:
+          BottomAppBar(color: Colors.blue, child: Container(height: 40.0)),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
@@ -126,7 +123,7 @@ class BytebankApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: ListaTransferencias(),
+        body: FormularioTransferencia(),
       ),
     );
   }
