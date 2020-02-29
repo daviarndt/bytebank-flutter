@@ -31,11 +31,9 @@ class FormularioTransferenciaState extends State<FormularioTransferencia> {
                 dica: "0.00",
                 icone: Icons.monetization_on),
             RaisedButton(
-                color: Colors.blue,
                 onPressed: () {
                   _criaTransferencia(context);
                 },
-                textColor: Colors.white,
                 child: Text("Confirmar")),
           ],
         ),
@@ -122,11 +120,9 @@ class ListaTransferenciasState extends State<ListaTransferencias> {
             });
           });
         },
-        backgroundColor: Colors.orangeAccent,
         child: Icon(Icons.add),
       ),
-      bottomNavigationBar:
-          BottomAppBar(color: Colors.blue, child: Container(height: 40.0)),
+      bottomNavigationBar: BottomAppBar(color: Colors.blueAccent, child: Container(height: 40.0)),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
@@ -166,9 +162,16 @@ class BytebankApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        body: ListaTransferencias(),
+      theme: ThemeData(
+        primaryColor: Colors.green[900],
+        accentColor: Colors.blueAccent[700],
+        buttonTheme: ButtonThemeData(
+          buttonColor: Colors.blueAccent[700],
+          textTheme: ButtonTextTheme.primary,
+        ),
       ),
+      home: ListaTransferencias(),
+      darkTheme: ThemeData.dark(),
     );
   }
 }
