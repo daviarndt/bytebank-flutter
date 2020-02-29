@@ -79,8 +79,14 @@ class ListaTransferencias extends StatelessWidget {
         title: Text("Transferências"),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.green,
         child: Icon(Icons.add),
       ),
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.blue,
+        child: Container(height: 40.0)
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }
@@ -120,7 +126,7 @@ class BytebankApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: FormularioTransferencia(),
+        body: ListaTransferencias(),
       ),
     );
   }
